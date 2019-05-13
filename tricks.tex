@@ -1,0 +1,62 @@
+\section{Useful Tricks and Identities}
+
+\begin{problembox}{}{}
+Let $\bX \in \R^{n \times p}$, $\lambda_i \in \R$, and $\bx_i^T \in \R^p$ be a row of $\bX$. Show that
+\begin{align*}
+	\sum_{i=1}^n \lambda_i \bx_i\bx_i^T = \bX^T
+	\begin{bmatrix}
+		\lambda_1 & & \bzero \\
+		& \ddots & \\
+		\bzero & & \lambda_n
+	\end{bmatrix} \bX
+\end{align*}
+\end{problembox}
+
+\begin{problembox}{Exact 2nd order Taylor's expansion}{}
+Suppose $f \in C^{2}(\R)$. Show that there exists $y \in (x_0, x)$ such that:
+\begin{align*}
+f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2} f''(y)(x - x_0)^2.
+\end{align*}
+This motivates the quadratic upper bound principle, which is used ubiquitously in MM algorithms.
+\end{problembox}
+
+\begin{proof}
+Applying fundamental theorem of calculus twice, we have
+\begin{align*}
+	f(x) 
+	&= f(x_0) + \int_{x_0}^x f'(x_1) dx_1\\
+	&=f(x_0) + \int_{x_0}^x \left(f'(x_0) + \int_{x_0}^{x_1} f''(x_2)dx_2 \right)dx_1\\
+	&= f(x_0) + f'(x_0)(x - x_0) + \int_{x_0}^x\int_{x_0}^{x_1}f''(x_2)dx_2dx_1.
+\end{align*}
+By mean value theorem, there exists $y \in (x_0, x_1)$ such that $\int_{x_0}^{x_1}f''(x_2)dx_2 = f''(y)(x_1 - x_0).$ Thus
+\begin{align*}
+	f(x)
+	&= f(x_0) + f'(x_0)(x - x_0) +\int_{x_0}^x f''(y)(x_1 - x_0)dx_1\\
+	&= f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2}f''(y)(x - x_0).
+\end{align*}
+\end{proof}
+
+\begin{problembox}{Clever use of Cauchy-Schwarz \hfill {\small \cite[Exercise 1.4.18]{lange2016mm}}}{}
+Prove the majorization
+\begin{equation*}
+\begin{split}
+(x + y - z)^2 \leq -(x_n + y_n - z_n)^2 + 2(x_n + y_n-z_n)(x+y-z) \\
++ 3[(x-x_n)^2 + (y-y_n)^2 + (z-z_n)^2]
+\end{split}
+\end{equation*}
+which separtes the variables $x, y, $ and $z$. In examples 1.3.6 and 1.3.7 this would facilitate penalizing parameter curvature rather than changes in parameter values. 
+\end{problembox}
+
+\begin{proof}
+First, move the first two terms on the right to the left: 
+$$(x + y - z)^2 - 2(x_n + y_n-z_n)(x+y-z) + (x_n + y_n - z_n)^2 \leq 3[(x-x_n)^2 + (y-y_n)^2 + (z-z_n)^2]$$
+The left can be factored cleanly as
+\begin{align*}
+\big( (x + y - z) - (x_n + y_n - z_n)\big)^2 \leq 3[(x-x_n)^2 + (y-y_n)^2 + (z-z_n)^2]
+\end{align*}
+\begin{align*}
+\iff (a + b + c)^2 \leq 3a^2 + 3b^2 + 3c^2
+\end{align*}
+where $a = x - x_n, b = y - y_n, c = z - z_n.$ Now define $v = (1, 1, 1), u = (a, b, c).$ By Cauchy-Schwarz, we obtain the desired result:
+$$(a + b + c)^2 \leq 3 (a^2 + b^2 + c^2).$$
+\end{proof}

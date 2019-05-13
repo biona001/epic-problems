@@ -1,0 +1,28 @@
+\section{Statistics}
+
+\begin{problembox}{}{}
+Consider a multiple regression where $n > p$ and $rank(\bX) = p$. Let
+\begin{align*}
+	\hat{\sigma}^2 = \frac{1}{n-p}\sum_{i=1}^{n}e_i^2
+\end{align*}
+where $\be = (e_1,...,e_n)^t = \by - \bX\hat{\bbeta}$ are the regression residuals and $\hat{\bbeta}$ is the best linear unbiased estimator of $\bbeta$. Show that $\hat{\sigma}^2$ is an unibased estimator of $\sigma^2.$
+\end{problembox}
+
+\begin{proof}
+We have
+\begin{align*}
+	\hat{\sigma^2} = \frac{1}{n-p}\sum_{i=1}^{n}e_i^2 = \frac{1}{n-p} (\by - \hat{\by})^T(\by - \hat{\by}).
+\end{align*}
+Also, $\hat{\by} = \bX\hat{\beta} = \bX(\bX^T\bX)^{-1}\bX^T\by = \bH\by$. Repeatedly applying cyclic permuation and linearity of trace operator, we have
+\begin{align*}
+ &\E\left( (\by - \bH\by)^T(\by - \bH\by) \right) = \E(\by^T(\bI - \bH)(\bI - \bH)\by) = \E(\by^T(\bI-\bH)\by) \\
+ &= \tr \left( \E(\by^T(\bI-\bH)\by)\right) = \E \left( \tr((\bX\bbeta + \bepsilon)^T(\bI-\bH)(\bX\bbeta + \bepsilon))\right) \\
+&= \E \left( \tr((\bX\bbeta + \bepsilon)^T(\bX\bbeta + \bepsilon - \bH\bX\bbeta - \bH \bepsilon))\right) = \E \left( \tr((\bX\bbeta + \bepsilon)^T(\bI-\bH) \bepsilon)\right) \\
+&= \E \left( \tr( \bepsilon^T(\bI-\bH)\bepsilon)\right) = \tr\left( (\bI - \bH)\E(\bepsilon\bepsilon^T)\right) = \tr\left((\bI-\bH)\Var(\bepsilon)\right)\\
+&= \sigma^2\tr(\bI - \bH) = \sigma^2\left(\tr(\bI_{n \times n}) - \tr(\bX(\bX^T\bX)^{-1}\bX^T)\right) = \sigma^2 (n - p).
+\end{align*}
+\end{proof}
+
+\begin{problembox}{}{}
+Show that sample mean and sample variance are 2 independent statistics. 
+\end{problembox}

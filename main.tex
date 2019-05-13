@@ -5,65 +5,12 @@
 \author{Benjamin Chu}
 \maketitle
 
-\section{Statistics}
+\input{math.tex}
+\input{statistics.tex}
+\input{tricks.tex}
+\input{applications.tex}
 
-\begin{problembox}{}{}
-Consider a multiple regression where $n > p$ and $rank(\bX) = p$. Let
-\begin{align*}
-	\hat{\sigma}^2 = \frac{1}{n-p}\sum_{i=1}^{n}e_i^2
-\end{align*}
-where $\be = (e_1,...,e_n)^t = \by - \bX\hat{\bbeta}$ are the regression residuals and $\hat{\bbeta}$ is the best linear unbiased estimator of $\bbeta$. Show that $\hat{\sigma}^2$ is an unibased estimator of $\sigma^2.$
-\end{problembox}
-
-\begin{proof}
-We have
-\begin{align*}
-	\hat{\sigma^2} = \frac{1}{n-p}\sum_{i=1}^{n}e_i^2 = \frac{1}{n-p} (\by - \hat{\by})^T(\by - \hat{\by}).
-\end{align*}
-Also, $\hat{\by} = \bX\hat{\beta} = \bX(\bX^T\bX)^{-1}\bX^T\by = \bH\by$. Repeatedly applying cyclic permuation and linearity of trace operator, we have
-\begin{align*}
- &\E\left( (\by - \bH\by)^T(\by - \bH\by) \right) = \E(\by^T(\bI - \bH)(\bI - \bH)\by) = \E(\by^T(\bI-\bH)\by) \\
- &= \tr \left( \E(\by^T(\bI-\bH)\by)\right) = \E \left( \tr((\bX\bbeta + \bepsilon)^T(\bI-\bH)(\bX\bbeta + \bepsilon))\right) \\
-&= \E \left( \tr((\bX\bbeta + \bepsilon)^T(\bX + \bepsilon - \bH\bX\bbeta - \bH \bepsilon))\right) = \E \left( \tr((\bX\bbeta + \bepsilon)^T(\bI-\bH) \bepsilon)\right) \\
-&= \E \left( \tr( \bepsilon^T(\bI-\bH)\bepsilon)\right) = \tr\left( (\bI - \bH)\E(\bepsilon\bepsilon^T)\right) = \tr\left((\bI-\bH)\Var(\bepsilon)\right)\\
-&= \sigma^2\tr(\bI - \bH) = \sigma^2\left(\tr(\bI_{n \times n}) - \tr(\bX(\bX^T\bX)^{-1}\bX^T)\right) = \sigma^2 (n - p).
-\end{align*}
-\end{proof}
-
-\begin{problembox}{}{}
-Let $\bX \in \R^{n \times p}$, $\lambda_i \in \R$, and $\bx_i^T \in \R^p$ be a row of $\bX$. Show that
-\begin{align*}
-	\sum_{i=1}^n \lambda_i \bx_i\bx_i^T = \bX^T
-	\begin{bmatrix}
-		\lambda_1 & & \bzero \\
-		& \ddots & \\
-		\bzero & & \lambda_n
-	\end{bmatrix} \bX
-\end{align*}
-\end{problembox}
-
-\begin{problembox}{}{}
-Suppose $f \in C^{2}$. Show that there exists $y \in (x_0, x)$ such that:
-\begin{align*}
-f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2} f''(y)(x - x_0)^2.
-\end{align*}
-This exact formula for 2nd order Taylor's expansion motivates the quadratic upper bound principle, which is used ubiquitously in MM algorithms.
-\end{problembox}
-
-\begin{proof}
-Applying fundamental theorem of calculus twice, we have
-\begin{align*}
-	f(x) 
-	&= f(x_0) + \int_{x_0}^x f'(x_1) dx_1\\
-	&=f(x_0) + \int_{x_0}^x \left(f'(x_0) + \int_{x_0}^{x_1} f''(x_2)dx_2 \right)dx_1\\
-	&= f(x_0) + f'(x_0)(x - x_0) + \int_{x_0}^x\int_{x_0}^{x_1}f''(x_2)dx_2dx_1.
-\end{align*}
-By mean value theorem, there exists $y \in (x_0, x_1)$ such that $\int_{x_0}^{x_1}f''(x_2)dx_2 = f''(y)(x_1 - x_0).$ Thus
-\begin{align*}
-	f(x)
-	&= f(x_0) + f'(x_0)(x - x_0) +\int_{x_0}^x f''(y)(x_1 - x_0)dx_1\\
-	&= f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2}f''(y)(x - x_0).
-\end{align*}
-\end{proof}
+\bibliographystyle{apalike}
+\bibliography{references}
 
 \end{document}
