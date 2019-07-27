@@ -1,6 +1,6 @@
 \section{Useful Tricks and Identities}
 
-\begin{problembox}{}{}
+\begin{problembox}{\hfill {\small \cite[Chapter 3.4]{dobson2008introduction}}}{}
 Let $\bX \in \R^{n \times p}$, $\lambda_i \in \R$, and $\bx_i^T \in \R^p$ be a row of $\bX$. Show that
 \begin{align*}
 	\sum_{i=1}^n \lambda_i \bx_i\bx_i^T = \bX^T
@@ -11,6 +11,41 @@ Let $\bX \in \R^{n \times p}$, $\lambda_i \in \R$, and $\bx_i^T \in \R^p$ be a r
 	\end{bmatrix} \bX
 \end{align*}
 \end{problembox}
+
+\begin{proof}
+This is a definition problem. By definition we have 
+\begin{align*}
+	\bX^T\bX = 
+	\begin{bmatrix}
+		\vrule & & \vrule\\
+		\bx_1 & \horzbar & \bx_n\\
+		\vrule & & \vrule
+	\end{bmatrix}
+	\begin{bmatrix}
+		\horzbar & \bx_1^T & \horzbar\\
+		& \vrule & \\
+		\horzbar & \bx_n^T & \horzbar
+	\end{bmatrix}
+	\equiv
+	\begin{bmatrix}
+	c_{11} & \cdots & c_{ij}\\
+	\vdots & & \vdots \\
+	& & c_{nn}
+	\end{bmatrix}		
+\end{align*}
+Therefore $c_{11} = x_{11}x_{11} + x_{21}x_{21} + ... + x_{n1}x_{n1}.$ Similarly,
+\begin{align*}
+	\sum_{i=1}^n \bx_i\bx_i^T
+	= 
+	\begin{bmatrix}
+		d_{11} & \cdots & d_{ij}\\
+	    \vdots & & \vdots \\
+	    & & d_{nn}
+	\end{bmatrix}
+	\iff d_{11} = \left(\bx_1\bx_1^T\right)_{11} + \left(\bx_2\bx_2^T\right)_{11}... + \left(\bx_n\bx_n^T\right)_{11} = c_{11}.
+\end{align*}
+Therefore the entries match up judiciously. 
+\end{proof}
 
 \begin{problembox}{Exact 2nd order Taylor's expansion}{}
 Suppose $f \in C^{2}(\R)$. Show that there exists $y \in (x_0, x)$ such that:

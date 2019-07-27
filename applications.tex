@@ -1,5 +1,65 @@
 \section{Real worl Application Problems}
 
 \begin{problembox}{}{}
-Suppose we wish to fit a large $n$ small $p$ linear regression problem. Every day millions of new sample points are generated. How would one obtain $\hat{\beta}$ without saving larger and larger matrices?
+Suppose we wish to fit a large $n$ small $p$ linear regression problem. Every day millions of new sample points are generated. How would one obtain $\hat{\bbeta}$ without saving larger and larger matrices?
 \end{problembox}
+
+\begin{proof}
+Let $\by_i$ and $\bX_i$ denote the samples and corresponding data of day $i$. Then up to day $n$, the concatenated full design matrix $\bX$ and full sample vector $\by$ is 
+\begin{align*}
+	[\bX \by ] = 
+	\begin{bmatrix}
+		[\bX_1 \by_1] \\
+		\vdots \\
+		[\bX_n \by_n]
+	\end{bmatrix}.
+\end{align*}
+Of course we do not want to store this entire matrix because it gets bigger each day. Fortunately, the gram matrix of $[\bX \by ]$ is readily computed:
+\begin{align*}
+	[\bX \by ]^t[\bX \by ] 
+	&= [\bX_1\by_1]^t[\bX_1\by_1] + ... + [\bX_n\by_n]^t[\bX_n\by_n]\\
+	&= 
+	\begin{bmatrix}
+		\bX_1^t\bX_1 & \bX_1^t \by\\
+		\by_1^t\bX_1 & \by_1^t \by_1
+	\end{bmatrix}
+	+ ... + 
+	\begin{bmatrix}
+		\bX_n^t\bX_1 & \bX_n^t \by\\
+		\by_n^t\bX_1 & \by_n^t \by_1
+	\end{bmatrix}.
+\end{align*}
+By property of the sweep operator, we know that sweeping on this full gram matrix have the property:
+\begin{align*}
+	\text{sweep}\left([\bX \by ]^t[\bX \by ]\right)
+	&= 
+	\begin{bmatrix}
+		- (\bX^t \bX)^{-1} & (\bX^t \bX)\bX^t \by\\
+		\by^t\bX(\bX^t \bX) & \by^t \by - \by^t\bX(\bX^t \bX)^y\bX^t\by
+	\end{bmatrix}\\
+	&= 
+	\begin{bmatrix}
+		-\sigma^{-2}\Cov(\hat{\beta}) & \hat{\bbeta}\\
+		\hat{\bbeta}^t & ||\by - \hat{\by}||_2^2
+	\end{bmatrix}
+\end{align*}
+Therefore, we store the \textit{sum} of all preceeding days of data in the form of a gram matrix. When new data arrives, we add the new data's gram matrix to the previous sum and sweep until the 2nd to last entry. Then the fitted model $\hat{\bbeta}$ will be on the top right column. Since $n \gg p$, the gram matrix is small and thus easy to store. 
+\end{proof}
+
+\begin{problembox}{Modeling count data \hfill {\small \cite[3.5.b]{dobson2008introduction}}}{}
+To model count data, one can choose among Poisson, Negative Binomial, and Binomial distributions. Given a set of observations $y_i$ and assuming a common rate parameter, how would one decide which of these distribution are more appropriate?
+\end{problembox}
+
+\begin{proof}
+The 3 different models under consideration are:
+\begin{align*}
+	y_i &\sim \operatorname{Poisson}(\lambda_i)\\
+	y_i &\sim \operatorname{NegBin}(r, p)\\
+	y_i &\sim \operatorname{Binomial}(n, p).
+\end{align*}
+The simplest way is to use the relationship between mean and variance of $\by$. For Poisson, $\E(by) = \Var(by)$. For negative binomial, $\Var(\by) > \E(\by)$. And for Binomial, $\E(\by) > \Var(\by)$. 
+
+\end{proof}
+
+
+
