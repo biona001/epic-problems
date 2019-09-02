@@ -1,7 +1,7 @@
 \section{Real worl Application Problems}
 
 \begin{problembox}{}{}
-Suppose we wish to fit a large $n$ small $p$ linear regression problem. Every day millions of new sample points are generated. How would one obtain $\hat{\bbeta}$ without saving larger and larger matrices?
+Suppose we have a huge number of samples and small number of covariate (large $n$ small $p$) problem and we wish to fit a linear regression. Furthremore, every day millions of new sample points are generated, i.e. $\hat{\bbeta}$ must be updated continuously whenever new data arrives. How would one obtain $\hat{\bbeta}$ without saving larger and larger matrices?
 \end{problembox}
 
 \begin{proof}
@@ -14,7 +14,7 @@ Let $\by_i$ and $\bX_i$ denote the samples and corresponding data of day $i$. Th
 		[\bX_n \by_n]
 	\end{bmatrix}.
 \end{align*}
-Of course we do not want to store this entire matrix because it gets bigger each day. Fortunately, the gram matrix of $[\bX \by ]$ is readily computed:
+Of course we do not want to store this entire matrix because it gets bigger each day. Fortunately, the gram matrix of $[\bX \by ]$ is a small $p \times p$ matrix and can be readily computed:
 \begin{align*}
 	[\bX \by ]^t[\bX \by ] 
 	&= [\bX_1\by_1]^t[\bX_1\by_1] + ... + [\bX_n\by_n]^t[\bX_n\by_n]\\

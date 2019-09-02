@@ -3,3 +3,35 @@
 \begin{problembox}{}{}
 Let $\bX = \R^{n \times n}$ random matrix. Show that probability that $\det(\bX) = 0$ is $0$. That is, almost all $n \times n$ random matrices are invertible. 
 \end{problembox}
+
+\begin{problembox}{}{}
+For $n \in \R$, prove that the following optimization problem
+\begin{align*}
+	\max &\quad xy\\
+	\text{s.t.} & \quad x + y = n.
+\end{align*}
+has optimal point $x = y = \frac{n}{2}$. Then show that, with the additional constraint that $x, y, n \in \Z$, the solution is achieved by $x = \ceil{n/2}, y = \floor{n/2}$. 
+\end{problembox}
+
+\begin{proof}
+Since $y = n - x$, the problem is equivalent to maximizing $x(n - x)$ with no constraint. Completing the square, we have
+\begin{align*}
+	x(n - x) = -(x^2 - nx) = -\left(x - \frac{n}{2}\right)^2 + \frac{n}{4}.
+\end{align*}
+Since $n$ is fixed, the objectice is maximized when $-\left(x - \frac{n}{2}\right)^2 = 0 \iff x = n / 2 = y.$ If we seek integer solutions, minimizing $x - n/2$ is achieved by rounding $n/2$ to the nearest integer. Thus $y$ is just $n - \ceil{n / 2} = \floor{n/2}$. \\
+\\
+\textbf{Note to self:} the intuitive method of differentiation natural to all calculus students fails for the integer case, whereas completing the square method natural to middle school students is straightforward. 
+\end{proof}
+
+\begin{problembox}{}{}
+Continuing the previous problem, for $n \in \R$, prove that the following optimization problem
+\begin{align*}
+	\max &\quad x_1 x_2 \cdots x_m\\
+	\text{s.t.} & \quad \sum_{i=1}^m x_i = n.
+\end{align*}
+has optimal point $x_i = \frac{n}{m}$. What would the solution look like with the additional constraint $x_i, n \in \Z$? 
+\end{problembox}
+
+\begin{problembox}{}{}
+Given a line of length $l$, show that the maximum area it can enclose is achieved by a circle of radius $\frac{l}{2\pi}.$
+\end{problembox}
