@@ -4,7 +4,7 @@
 Let $\bX = \R^{n \times n}$ random matrix. Show that probability that $\det(\bX) = 0$ is $0$. That is, almost all $n \times n$ random matrices are invertible. 
 \end{problembox}
 
-\begin{problembox}{}{}
+\begin{problembox}{When middle school algebra surpase college calculus}{}
 For $n \in \R$, prove that the following optimization problem
 \begin{align*}
 	\max &\quad xy\\
@@ -35,3 +35,63 @@ has optimal point $x_i = \frac{n}{m}$. What would the solution look like with th
 \begin{problembox}{}{}
 Given a line of length $l$, show that the maximum area it can enclose is achieved by a circle of radius $\frac{l}{2\pi}.$
 \end{problembox}
+
+
+\begin{problembox}{}{}
+Suppose matrix $\bM$ is orthogonal and upper triangular, show that $\bM$ is diagonal with $\pm1$ on the diagonal.
+\end{problembox}
+
+\begin{proof}
+Write $M = [\bv_1, ..., \bv_n]$ where each $\bv_i$ are column vectors with $n$ terms. Then the upper triangularity of $M$ implies that 
+\begin{align*}
+\bv_1 = 
+\begin{bmatrix}
+    a_{11} \\
+    0 \\ 
+    \vdots \\
+	0 \\
+\end{bmatrix}
+, \quad \bv_2 = 
+\begin{bmatrix}
+    a_{12} \\
+    a_{22} \\
+    0 \\ 
+	\vdots \\
+	0 \\
+\end{bmatrix}
+, \quad \bv_3 = 
+\begin{bmatrix}
+    a_{13} \\
+    a_{23} \\
+    a_{33} \\ 
+    0 \\
+	\vdots \\
+	0 \\
+\end{bmatrix}
+... \text{and so on.}
+\end{align*}
+
+Since $\bM$ is orthogonal, $\bv_1^t\bv_1 = 1 \iff a_{11} = \pm1$. Furthermore, orthogonality implies that $\bv_1^t \bv_2 = 0 \iff a_{12} = 0 \iff v_2 = [0, a_{22}, 0, ..., 0]^t$. Again $a_{22} = \pm1$ since $\bv_2^t\bv_2 = 1$. The result follows by induction on $n$. 
+\end{proof}
+
+\begin{problembox}{\hfill {\small \cite[Exercise 8.23]{lange2010numerical}}}{}
+Use the Gerschgorin circle theorem to estimate eigenvalues of the following matrix:
+\[ 
+\begin{bmatrix}
+    4 & 0.2 & -0.1 & 0.1\\
+    0.2 & -1 & -0.1 & 0.05\\
+    -0.1 & -0.1 & 3 & 0.1\\
+    0.1 & 0.05 & 0.1 & -3
+\end{bmatrix}
+\]
+\end{problembox}
+
+\begin{proof}
+Since the matrix is symmetric, checking along the rows or along the columns would yield the same invervals. The eigenvalues lie within the four disks as follows:
+$$D(4, 0.4) = [3.6, 4.4], \quad D(-1, 0.35) = [-1.35, -0.65]$$
+$$ D(3, 0.3) = [2.7, 3.3], \quad D(-3, 0.25) = [-3.25, -2.75].$$
+The actual eigenvalues are $4.0198, -3.00433, 2.99365$, and $-1.00911$, which indeed lies within our estimated invervals. \\
+\\
+\textbf{Note to self:} From this it seems like the eigenvalue can be better estimated by $a_{ii} + \sum_{i \neq j} a_{ij} $, so the disk interval can be decreased by half. For instance, $ D(4,0.4) = [4, 4.4]$ since $0.2-0.1+0.1 = 0.1 =$ positive, so we can exclude the interval [3.6, 4].
+
+\end{proof}
