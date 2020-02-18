@@ -1,4 +1,4 @@
-Interesting problems I came across or thought of myself. Some are famous results that are interesting or unexpected. Many problems does not come with proofs because I haven't came across a satisfactory one yet, but are otherwise known results. These problems/statements come in roughly 4 categories:
+Interesting problems I came across or thought of myself. Some are famous results that are interesting or unexpected. These are all known results, but many problems do not yet have proofs because I don't know of a satisfactory one yet. These problems/statements come in a few categories that may expand in the future:
 
 + Math
 + Statistics

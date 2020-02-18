@@ -67,8 +67,9 @@ By mean value theorem, there exists $y \in (x_0, x_1)$ such that $\int_{x_0}^{x_
 \begin{align*}
 	f(x)
 	&= f(x_0) + f'(x_0)(x - x_0) +\int_{x_0}^x f''(y)(x_1 - x_0)dx_1\\
-	&= f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2}f''(y)(x - x_0).
+	&= f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2}f''(y)(x - x_0)^2.
 \end{align*}
+To complete the proof, note that $x_1 \in (x_0, x)$, so $y \in (x_0, x)$.
 \end{proof}
 
 \begin{problembox}{Clever use of Cauchy-Schwarz \hfill {\small \cite[Exercise 1.4.18]{lange2016mm}}}{}
